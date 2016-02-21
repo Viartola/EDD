@@ -38,7 +38,20 @@ public class Calculator {
 	 * Escribir todos los n�meros del number al 0 de step en step.
 	 */
 	public static int[] stepThisNumber(int number, int step) {
+		if (step == 0){
+			return new int[0];
+		}
 		
+		int[] numeros = new int[(number - 1) / step];
+		
+		int i = 0;
+		
+		while (number > step){
+			number -= step;
+			numeros[i] = number;
+			i++;
+		}
+		return numeros;
 		
 	}
 
