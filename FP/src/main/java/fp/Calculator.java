@@ -16,6 +16,21 @@ public class Calculator {
      * devuelve una lista con los n n?meros de la serie de fibonacci.
      */
 	public static List<Integer> fibonacci(int n) {
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		if (n < 1)
+			return array;
+		array.add(1);
+		if (n == 1)
+			return array;
+		array.add(1);
+		if (n == 2)
+			return array;
+		
+
+		for (int i = 2; i < n; i++) {
+			array.add(array.get(i - 2) + array.get(i - 1));
+		}
+		return array;
 		
 	}
 
