@@ -60,7 +60,26 @@ public class Calculator {
 	 * divisores que tiene.
 	 */
 	public static int[] divisors(int n) {
+		if (n < 1){
+			return null;
+		}
 		
+		int cont = 0;
+		
+		for (int i = n; i > 0; i--)
+			if (n % i == 0){
+				cont++;
+			}
+		
+		int j[] = new int[cont];
+		
+		for (int i = 1; i <= n; i++)
+			if (n % i == 0) {
+				cont--;
+				j[cont] = i;
+			}
+
+		return j;
 		
 	}
 
