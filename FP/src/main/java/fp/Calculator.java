@@ -87,6 +87,28 @@ public class Calculator {
 	 * Toma como par�metros una cadena de caracteres y devuelve cierto si la cadena resulta ser un pal�ndromo
 	 */
 	public static boolean checkIsPalindrome(String cadena) {
+		if (cadena == null) {
+			return false;
+		}
+		cadena = cadena.toLowerCase();
+		String limpio = "";
+		String tildes = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+		String notildes = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
+		
+		for (int i = 0; i < cadena.length(); i++){
+			if (Character.isLetter(cadena.charAt(i))) {
+				if (tildes.indexOf(cadena.charAt(i)) != -1) 
+					limpio += notildes.charAt(tildes.indexOf(cadena.charAt(i)));
+				else
+					limpio += cadena.charAt(i);
+			}
+		}
+		
+		for (int i = 0; i < limpio.length() / 2; i++){
+			if (limpio.charAt(i) != limpio.charAt(limpio.length() - 1 - i))
+				return false;
+		}
+		return true;
 		
 		
 	}
