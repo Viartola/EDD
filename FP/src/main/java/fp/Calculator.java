@@ -138,7 +138,7 @@ public class Calculator {
 			return decenas1[(n / 10) - 1] + unidades[n % 10];
 		
 		if (n > 99)
-			return "M�s de dos d�gitos";
+			return "Más de dos dígitos";
 		
 		return decenas2[(n / 10) - 2] + " y " + unidades[n % 10];
 		
@@ -149,17 +149,46 @@ public class Calculator {
 	 * dd-MM-yyyy
 	 */
 	public static boolean isLeapYear(String fecha) {
+		if (!isValidDate(fecha)){
+			return false;
+		}
 		
-		
+		int año = Integer.parseInt(fecha.substring(6));
+
+		if ((año % 4) != 0){
+			return false;
+		}
+		if (((año % 100) == 0) && ((año % 400) != 0)){
+			return false;
+		}
+		return true;
 	}
 
 	/*
 	 * este metodo devuelve cierto si la fecha es v�lida
 	 */
 	public static boolean isValidDate(String date) {
-		
+		int dia, mes, año;
+		try {
+			dia = Integer.parseInt(date.substring(0, 2));
+			mes = Integer.parseInt(date.substring(3, 5));
+			año = Integer.parseInt(date.substring(6));
+		} catch(NumberFormatException e){
+	        return false;
+	    }catch(StringIndexOutOfBoundsException e){
+	        return false;
+	    }
+		if ((date.charAt(2) == date.charAt(5)) && ("/.- ".indexOf(date.charAt(2)) != -1)){
+			if ((dia <= 31) && (dia > 0)){
+				if ((mes <= 12) && (mes > 0)){
+					if (año > 0){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 					
 	}
-
 }
 
