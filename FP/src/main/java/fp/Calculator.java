@@ -109,8 +109,6 @@ public class Calculator {
 				return false;
 		}
 		return true;
-		
-		
 	}
 
 	/*
@@ -118,11 +116,31 @@ public class Calculator {
 	 * mostrar: cincuenta y seis
 	 */
 	public static String speakToMe(int n){
-		
+		String numero = numberToLetter(n);
+		return numero.substring(0, 1).toUpperCase() + numero.substring(1);
 	}	
 	
 	public static String numberToLetter(int n) {
+		String[] unidades = new String[] {"cero", "uno", "dos", "tres", "cuatro", 
+				"cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
+				"trece", "catorce", "quince", "diecis�is"};
+		String[] decenas1 = {"dieci", "veinti"};
+		String[] decenas2 = {"veinte", "treinta", "cuarenta", "cincuenta", 
+				"sesenta", "setenta", "ochenta", "noventa"};
 		
+		if (n < 17)
+			return unidades[n];
+		
+		if ((n % 10) == 0)
+			return decenas2[(n / 10) - 2];
+
+		if (n < 30)
+			return decenas1[(n / 10) - 1] + unidades[n % 10];
+		
+		if (n > 99)
+			return "M�s de dos d�gitos";
+		
+		return decenas2[(n / 10) - 2] + " y " + unidades[n % 10];
 		
 	}
 
