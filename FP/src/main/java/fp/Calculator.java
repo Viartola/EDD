@@ -115,7 +115,7 @@ public class Calculator {
 	public static String numberToLetter(int n) {
 		String[] unidades = new String[] {"cero", "uno", "dos", "tres", "cuatro", 
 				"cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce",
-				"trece", "catorce", "quince", "diecis�is"};
+				"trece", "catorce", "quince", "dieciséis"};
 		String[] decenas1 = {"dieci", "veinti"};
 		String[] decenas2 = {"veinte", "treinta", "cuarenta", "cincuenta", 
 				"sesenta", "setenta", "ochenta", "noventa"};
