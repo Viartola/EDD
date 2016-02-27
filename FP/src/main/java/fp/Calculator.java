@@ -16,21 +16,13 @@ public class Calculator {
      * devuelve una lista con los n n?meros de la serie de fibonacci.
      */
 	public static List<Integer> fibonacci(int n) {
-		ArrayList<Integer> array = new ArrayList<Integer>();
-		if (n < 1)
-			return array;
+		List<Integer> array = new ArrayList<Integer>();
 		array.add(1);
-		if (n == 1)
-			return array;
-		array.add(1);
-		if (n == 2)
-			return array;
-		
-
-		for (int i = 2; i < n; i++) {
-			array.add(array.get(i - 2) + array.get(i - 1));
-		}
-		return array;
+ 		array.add(1);
+ 		for (int i = 2; i < n; i++) {
+ 			array.add(array.get(i-2) + array.get(i-1));
+ 		}
+ 		return array;
 		
 	}
 
@@ -42,16 +34,16 @@ public class Calculator {
 			return new int[0];
 		}
 		
-		int[] numeros = new int[(number - 1) / step];
+		int[] arrayNumber = new int[(number - 1) / step];
 		
 		int i = 0;
 		
 		while (number > step){
 			number -= step;
-			numeros[i] = number;
+			arrayNumber[i] = number;
 			i++;
 		}
-		return numeros;
+		return arrayNumber;
 		
 	}
 
@@ -71,15 +63,15 @@ public class Calculator {
 				cont++;
 			}
 		
-		int j[] = new int[cont];
+		int factors[] = new int[cont];
 		
 		for (int i = 1; i <= n; i++)
 			if (n % i == 0) {
 				cont--;
-				j[cont] = i;
+				factors[cont] = i;
 			}
 
-		return j;
+		return factors;
 		
 	}
 
@@ -168,27 +160,20 @@ public class Calculator {
 	 * este metodo devuelve cierto si la fecha es v�lida
 	 */
 	public static boolean isValidDate(String date) {
-		int dia, mes, año;
-		try {
-			dia = Integer.parseInt(date.substring(0, 2));
-			mes = Integer.parseInt(date.substring(3, 5));
-			año = Integer.parseInt(date.substring(6));
-		} catch(NumberFormatException e){
-	        return false;
-	    }catch(StringIndexOutOfBoundsException e){
-	        return false;
-	    }
-		if ((date.charAt(2) == date.charAt(5)) && ("/.- ".indexOf(date.charAt(2)) != -1)){
-			if ((dia <= 31) && (dia > 0)){
-				if ((mes <= 12) && (mes > 0)){
-					if (año > 0){
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-					
+		if(date.length() != 10){return false;}
+		 		int dia = -1, mes = -1, año = -1;
+		  		try{
+		  			dia = Integer.parseInt(date.substring(0,2));
+		  			mes = Integer.parseInt(date.substring(3,5));
+					año = Integer.parseInt(date.substring(6,10));
+		  		}catch(Exception e){return false;}
+		  		
+
+		 		if ((dia > 31) || (dia < 1) || (mes > 12) || (mes < 1) || (año < 1)){return false;}
+		  		if ((dia == 29) && (mes == 2) && (isLeapYear(date))){return true;}
+		  		else if (((dia <= 31) && (mes < 8) && (mes % 2 == 1)) || ((dia <= 31) && (mes >= 8) && (mes % 2 == 0))) 
+		  			return true;
+			return false;
 	}
 }
 
