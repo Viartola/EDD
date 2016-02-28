@@ -96,14 +96,16 @@ checkIsPalindrome("No me guardéis rencor, al menos no mucho"));
 		assertTrue(isLeapYear("01-01-1928"));
 		assertFalse(isLeapYear("01-01-2100"));
 		assertTrue(isLeapYear("01-01-2000"));
+		assertTrue(isLeapYear("01-01-2016"));
 		System.out.println("1P");
 	}
 
 	@Test
 	public void testIsValidDate() {
 		assertNotNull(isValidDate(""));
-		assertTrue(isValidDate("01-01-0001"));
+		assertTrue(isValidDate("01-01-1001"));
 		assertTrue(isValidDate("31-12-2015"));
+		assertTrue(isValidDate("29-02-2016"));
 		assertFalse(isValidDate(""));
 		assertFalse(isValidDate("asdasd"));
 		assertFalse(isValidDate("21-12"));

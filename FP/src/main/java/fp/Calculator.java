@@ -3,7 +3,6 @@ import java.util.*;
 
 public class Calculator {
 
-
 	/*
      * este metodo devuelve el Class del object que le pasamos
      */
@@ -83,7 +82,7 @@ public class Calculator {
 			return false;
 		}
 		cadena = cadena.toLowerCase();
-		String limpio = "";
+		String limpio = ""; 
 		String tildes = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
 		String notildes = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
 		
@@ -141,39 +140,45 @@ public class Calculator {
 	 * dd-MM-yyyy
 	 */
 	public static boolean isLeapYear(String fecha) {
-		if (!isValidDate(fecha)){
+		if (!isValidDate(fecha))
 			return false;
-		}
+		return isLeapYear(Integer.parseInt(fecha.substring(6)));
+	}
 		
-		int año = Integer.parseInt(fecha.substring(6));
-
-		if ((año % 4) != 0){
+	public static boolean isLeapYear(int year) {
+		if ((year % 4) != 0)
 			return false;
-		}
-		if (((año % 100) == 0) && ((año % 400) != 0)){
+		if (((year % 100) == 0) && ((year % 400) != 0))
 			return false;
-		}
 		return true;
 	}
 
 	/*
-	 * este metodo devuelve cierto si la fecha es v�lida
+	 * este metodo devuelve cierto si la fecha es válida
 	 */
+	
 	public static boolean isValidDate(String date) {
-		if(date.length() != 10){return false;}
-		 		int dia = -1, mes = -1, año = -1;
-		  		try{
-		  			dia = Integer.parseInt(date.substring(0,2));
-		  			mes = Integer.parseInt(date.substring(3,5));
-					año = Integer.parseInt(date.substring(6,10));
-		  		}catch(Exception e){return false;}
-		  		
-
-		 		if ((dia > 31) || (dia < 1) || (mes > 12) || (mes < 1) || (año < 1)){return false;}
-		  		if ((dia == 29) && (mes == 2) && (isLeapYear(date))){return true;}
-		  		else if (((dia <= 31) && (mes < 8) && (mes % 2 == 1)) || ((dia <= 31) && (mes >= 8) && (mes % 2 == 0))) 
-		  			return true;
-			return false;
+		int day, month, year;
+		try {
+			day = Integer.parseInt(date.substring(0, 2));
+			month = Integer.parseInt(date.substring(3, 5));
+			year = Integer.parseInt(date.substring(6));
+		} catch(NumberFormatException e){
+	        return false;
+	    }catch(StringIndexOutOfBoundsException e){
+	        return false;
+	    }
+		if ((date.charAt(2) == date.charAt(5)) && ("/.- ".indexOf(date.charAt(2)) != -1))
+			if (year > 0)
+				if ((month <= 12) && (month > 0)) {
+					int[] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+					if (isLeapYear(year))
+						days[1]++;
+					if ((day <= days[month - 1]) && (day > 0))
+						return true;
+				}
+		return false;
 	}
+			
 }
 
